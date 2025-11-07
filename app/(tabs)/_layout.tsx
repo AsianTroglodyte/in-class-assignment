@@ -3,7 +3,16 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Tabs } from "expo-router";
 import React, { createContext, useState } from "react";
 
+// export type ProfileData = {
+//     name: string,
+//     email: string,
+//     newsLetterToggle: boolean
+// }
 
+// export type ProfileContextType = {
+//   profileData: ProfileData;
+//   setProfileData: React.Dispatch<React.SetStateAction<ProfileData>>;
+// };
 
 type ProfileContextType = any 
 // {
@@ -29,9 +38,9 @@ export default function TabLayout() {
     // const
     const [profileData, setProfileData] = useState(
         {
-            name: "string",
-            email: "email",
-            newsLetterToggle: true
+            name: "[name]",
+            email: "",
+            newsLetterToggle: false
         }
     ); 
     return (
