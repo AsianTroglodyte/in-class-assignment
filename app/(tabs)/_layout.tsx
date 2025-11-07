@@ -1,35 +1,61 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+// import { IconSymbol } from "@/app-example/components/ui/icon-symbol";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Tabs } from "expo-router";
+import React, { createContext, useState } from "react";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+
+
+type ProfileContextType = any 
+// {
+//     profileData: {
+//         name: string,
+//         email: string,
+//         newsLetterToggle: boolean
+//     },
+//     setProfileData: React.Dispatch<React.SetStateAction< {
+//         name: string,
+//         email: string,
+//         newsLetterToggle: boolean
+//     }>>
+// };
+export const ProfileContext = createContext<ProfileContextType | null>(null);
+// profileData: {
+//     name: "string",
+//     email: "email",
+//     newsLetterToggle: true
+// },
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+    // const
+    const [profileData, setProfileData] = useState(
+        {
+            name: "string",
+            email: "email",
+            newsLetterToggle: true
+        }
+    ); 
+    return (
+        <ProfileContext.Provider value={{
+            profileData,
+            setProfileData,
+            }}
+        >
+            
+        <Tabs>
+            <Tabs.Screen 
+                name="index"
+                options={{
+                    title: "home",
+                    tabBarIcon: () => <MaterialIcons size={28} name="house" color={"black"} />
+                }}/>
 
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+            <Tabs.Screen 
+                name="settings"
+                options={{
+                    title: "settings",
+                    tabBarIcon: () => <MaterialIcons size={28} name="settings" color={"black"} />
+                }}/>
+        </Tabs>
+        </ProfileContext.Provider>
+    )
 }
